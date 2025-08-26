@@ -3,7 +3,6 @@ import path from "path";
 import { execSync } from "child_process";
 import { PREFIX } from "./const.mjs";
 import { compileFunction } from "vm";
-import { execSync } from "child_process";
 
 export const enableX265 = (isMusl, isWindows, isArm) => {
   if (isWindows) {

@@ -3,6 +3,7 @@ import path from "path";
 import { execSync } from "child_process";
 import { PREFIX } from "./const.mjs";
 import { compileFunction } from "vm";
+import { execSync } from "child_process";
 
 export const enableX265 = (isMusl, isWindows, isArm) => {
   if (isWindows) {
@@ -84,13 +85,12 @@ export const enableX265 = (isMusl, isWindows, isArm) => {
   };
 
   // Determine whether to use 'cmake' or 'cmake3'
-  const whichSync = require("child_process").execSync;
   let cmakeCmd = "cmake";
   try {
-    whichSync("cmake --version", { stdio: "ignore" });
+    execSync("cmake --version", { stdio: "ignore" });
   } catch {
     try {
-      whichSync("cmake3 --version", { stdio: "ignore" });
+      execSync("cmake3 --version", { stdio: "ignore" });
       cmakeCmd = "cmake3";
     } catch {
       throw new Error("Neither cmake nor cmake3 is available in PATH.");

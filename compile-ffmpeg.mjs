@@ -123,14 +123,14 @@ if (!existsSync(PREFIX)) {
 execSync("git config --global advice.detachedHead false");
 const isWindows = process.argv.includes("windows");
 const isMusl = process.argv.includes("musl");
-const isArm = process.argv.includes("arm");
+const isOldCmake = process.argv.includes("old-cmake");
 
 await enableFdkAac(isWindows);
 enableAv1(isWindows);
 enableZimg(isWindows);
 enableVpx(isWindows);
 enableX264(isMusl, isWindows);
-enableX265(isMusl, isWindows, isArm);
+enableX265(isMusl, isWindows, isOldCmake);
 enableLibMp3Lame(isWindows);
 enableOpus(isWindows);
 

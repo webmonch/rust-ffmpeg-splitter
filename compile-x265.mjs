@@ -1,10 +1,8 @@
-import fs, { existsSync, readFileSync, unlinkSync } from "fs";
-import path from "path";
+import fs, { readFileSync } from "fs";
 import { execSync } from "child_process";
 import { PREFIX } from "./const.mjs";
-import { compileFunction } from "vm";
 
-export const enableX265 = (isMusl, isWindows, isArm) => {
+export const enableX265 = (isMusl, isWindows, isOldCmake) => {
   if (isWindows) {
     execSync("cp x265-windows/lib/libx265.a remotion/lib/libx265.a");
     execSync(
@@ -22,7 +20,7 @@ export const enableX265 = (isMusl, isWindows, isArm) => {
   ].filter(Boolean);
 
   if (!fs.existsSync("x265")) {
-    if (isArm && isMusl) {
+    if (isOldCmake) {
       execSync("git clone https://github.com/videolan/x265 x265", {
         stdio: "inherit",
       });
@@ -41,7 +39,7 @@ export const enableX265 = (isMusl, isWindows, isArm) => {
     stdio: "inherit",
   });
 
-  if (isArm && isMusl) {
+  if (isOldCmake) {
     // stable as marked on the github repo
     // for older cmake versions
     execSync("git checkout 02d2f496c94c0ef253766b826d95af3404b2781e", {
